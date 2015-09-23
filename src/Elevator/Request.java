@@ -4,6 +4,7 @@ package Elevator;
  * Created by ZXM on 9/17/15.
  */
 public class Request {
+    private final int numOfFloors = 40;
     private int floor;
     private Direction direction;
 
@@ -26,5 +27,11 @@ public class Request {
     public Request(int floor, Direction direction) {
         this.floor = floor;
         this.direction = direction;
+    }
+
+    public boolean isValid() {
+        if (direction.equals("STILL")) return false;
+        if (floor > numOfFloors || floor < 1) return false;
+        return true;
     }
 }
