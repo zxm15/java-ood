@@ -1,5 +1,8 @@
 package Elevator;
 
+import java.util.Collections;
+import java.util.PriorityQueue;
+
 /**
  * Created by ZXM on 9/17/15.
  */
@@ -7,14 +10,17 @@ public class Elevator {
     private final int maxWeight = 2000;
     private Direction currDirection;
     private ElevatorStatus status;
+    private PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+    private PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
     private int floor;
 
     /**
-     * Elevator receive a request and go to that floor. Need a list of requests
+     * Elevator add a request to task heap
      * @param request
      */
     public void addRequest(Request request) {
-
+        //check request moving direction aligns with elevators moving direction, if not, then
+        if ()
     }
 
     /**
