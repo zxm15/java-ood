@@ -18,10 +18,6 @@ public class Elevator {
      * Elevator add a request to task heap
      * @param request
      */
-    public void addRequest(Request request) {
-        //check request moving direction aligns with elevators moving direction, if not, then
-        if ()
-    }
 
     /**
      * Impelment a logic that determines if the elevator could open door now
