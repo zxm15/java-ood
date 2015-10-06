@@ -5,24 +5,36 @@ import java.util.*;
 /**
  * Created by ZXM on 9/17/15.
  */
+
 public class Scheduler {
+    private final int numOfFloors = 100;
     private final int numOfElevators = 3;
     private final int buffer = 1;
     private Elevator[] elevators;
     private Queue<Elevator> availableElevators;
-    private List<Elevator> upMovingElevators;
-    private List<Elevator> downMoivingElevators;
+    private boolean[] upRequests;
+    private boolean[] downRequests;
+    private int numOfUpRequests = 0;
+    private int numOfDownRequests = 0;
+    private int[] upRequestsFloorRange = new int[] {0, 0}; //first min, second max
+    private int[] downRequestsFloorRange = new int[] {0, 0};
+    private Queue<Elevator> upMovingElevators;
+    private Queue<Elevator> downMoivingElevators;
+
     protected Scheduler _instance;
 
     private Scheduler() {
+        //initialization
         elevators = new Elevator[numOfElevators];
+        upRequests = new boolean[numOfFloors];
+        downRequests = new boolean[numOfFloors];
         availableElevators = new LinkedList<>();
         for (int i = 0; i < numOfElevators; i++) {
             elevators[i] = new Elevator();
             availableElevators.offer(elevators[i]);
         }
-        upMovingElevators = new ArrayList<>();
-        downMoivingElevators = new ArrayList<>();
+        upMovingElevators = new LinkedList<>();
+        downMoivingElevators = new LinkedList<>();
 
     }
 
@@ -34,53 +46,74 @@ public class Scheduler {
         return _instance;
     }
 
-
     /**
-     * Find a proper elevator to receive a request
-     * @return
+     * one thread receives requeset and mark the up and down reqeusts array
+     * @param request
      */
-    public boolean assignRequestToElevator(Request request) {
-        if (request == null || ! request.isValid()) return false;
-        if (! availableElevators.isEmpty()) {
-            availableElevators.poll().addRequest(request);
-            return true;
-        }
+
+    public void receiveRequest(Request request) {
         Direction direction = request.getDirection();
-        switch (direction) {
+        switch(direction) {
             case UP:
-                if (upMovingElevators.isEmpty()) {
-                    assignRequestToElevatorHelper(downMoivingElevators, request);
-                } else {
-                    assignRequestToElevatorHelper(upMovingElevators, request);
-                }
+                upRequests[request.getFloor()] = true;
+                numOfUpRequests++;
+                upRequestsFloorRange[0] = Math.min(upRequestsFloorRange[0], request.getFloor());
+                upRequestsFloorRange[1] = Math.max(upRequestsFloorRange[1], request.getFloor());
+                break;
             case DOWN:
-                if (downMoivingElevators.isEmpty()) {
-                    assignRequestToElevatorHelper(upMovingElevators, request);
-                } else {
-                    assignRequestToElevatorHelper(downMoivingElevators, request);
-                }
+                downRequests[request.getFloor()] = true;
+                numOfDownRequests++;
+                downRequestsFloorRange[0] = Math.min(downRequestsFloorRange[0], request.getFloor());
+                downRequestsFloorRange[1] = Math.max(downRequestsFloorRange[1], request.getFloor());
+                break;
             case STILL:
                 break;
         }
-
-        return true;
     }
-
-    private void assignRequestToElevatorHelper(List<Elevator> elevators, Request request) {
-        if (elevators == null || elevators.isEmpty()) throw new IllegalArgumentException("The elevator list is empty");
-        int size = elevators.size();
-        for (int i = 0; i < size; i++) {
-            Elevator elevator = elevators.get(i);
-            if (! elevator.getCurrDirection().equals(request.getDirection())) break;
-            int diff = request.getFloor() - elevator.getFloor();
-            if (diff > buffer) {
-                elevator.addRequest(request);
-                return;
+    /**
+     * A thread assigns down requests to down moving elevators;
+     * @return
+     */
+    public void assignDownRequest() {
+        while (true) {
+            //always listen to the state of down requests and down moving elevators
+            while (numOfDownRequests > 0 && ! downMoivingElevators.isEmpty()) {
+                Elevator elevator = downMoivingElevators.poll();
+                int elevatorFloor = elevator.getFloor();
+                if (elevatorFloor - downRequestsFloorRange[0] > buffer) {
+                    for (int i = downRequestsFloorRange[0]; i <= elevatorFloor ; i++) {
+                        if (downRequests[i]) {
+                            elevator.addRequest(i);
+                            downRequests[i] = false;
+                            numOfDownRequests--;
+                            if (i == downRequestsFloorRange[0]) {
+                                downRequestsFloorRange[0] = numOfFloors + 100;
+                            }
+                            downRequestsFloorRange[0] = Math.min(downRequestsFloorRange[0], i);
+                        }
+                    }
+                }
+                downMoivingElevators.offer(elevator);
             }
         }
-        Random rand = new Random();
-        elevators.get(rand.nextInt(size)).addRequest(request);
     }
+
+
+//    private void assignRequestToElevatorHelper(List<Elevator> elevators, Request request) {
+//        if (elevators == null || elevators.isEmpty()) throw new IllegalArgumentException("The elevator list is empty");
+//        int size = elevators.size();
+//        for (int i = 0; i < size; i++) {
+//            Elevator elevator = elevators.get(i);
+//            if (! elevator.getCurrDirection().equals(request.getDirection())) break;
+//            int diff = request.getFloor() - elevator.getFloor();
+//            if (diff > buffer) {
+//                elevator.addRequest(request);
+//                return;
+//            }
+//        }
+//        Random rand = new Random();
+//        elevators.get(rand.nextInt(size)).addRequest(request);
+//    }
 
 
 
