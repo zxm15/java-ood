@@ -8,22 +8,28 @@ import java.util.Map;
  */
 public class Library {
     private Map<Integer, Book> bookMap;
-
+    private Map<Book, User> userBookMap;
     public Library() {
         bookMap = new HashMap<>();
     }
 
-    public Book getBook(int id) {
-        if (bookMap.containsKey(id)) return bookMap.get(id);
+    public Book getBook(int bookID) {
+        if (bookMap.containsKey(bookID)) return bookMap.get(bookID);
         return null;
     }
 
-    public boolean borrowBook(User user, Book book) {
+    public boolean borrowBook(User user, int bookID) {
+        Book book = getBook(bookID);
+        if (userBookMap.containsKey(book)) return false;
+        userBookMap.put(book, user);
+
+        return true;
 
     }
 
-    public void returnBook(User user, Book book) {
-
+    public void returnBook(User user, int bookID) {
+        Book book = getBook(bookID);
+        userBookMap.remove(book);
     }
 
 

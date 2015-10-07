@@ -6,6 +6,6 @@ package OnlineBookReader;
 public class OnlineBookReaderMain {
 
     public static void main(String[] args) {
-        
+
     }
 }

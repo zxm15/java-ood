@@ -8,58 +8,35 @@ public class User {
     private String username;
     private String password;
 
-    private Reader reader;
-
-    public User() {
-        reader = new Reader();
-    }
-    //user service
-    public boolean signIn() {
-
+    public User(int id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
     }
 
-    public boolean signOut() {
+    //Getters and Setters
 
+    public int getId() {
+        return id;
     }
 
-    public boolean unregister() {
-
+    public void setId(int id) {
+        this.id = id;
     }
 
-    //book service
-    public boolean searchBook(int bookID) {
-
+    public String getUsername() {
+        return username;
     }
 
-    public boolean borrowBook(int bookID) {
-
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public boolean returnBook(int bookID) {
-
+    public String getPassword() {
+        return password;
     }
 
-    //book reading service
-
-    public void readBook() {
-
+    public void setPassword(String password) {
+        this.password = password;
     }
-
-    public void closeBook() {
-
-    }
-
-    public boolean nextPage() {
-
-    }
-
-    public boolean previousPage() {
-
-    }
-
-    public boolean gotoPage(int pageNumber) {
-
-    }
-
-
 }

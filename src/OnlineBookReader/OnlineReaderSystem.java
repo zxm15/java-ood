@@ -4,43 +4,39 @@ package OnlineBookReader;
  * Created by zxm on 10/6/15.
  */
 public class OnlineReaderSystem {
-    private UserManagement users;
-    private Library library;
+    private UserManagement users; //user service
+    private Library library; //book service
+    private Reader reader; //reading service
 
-    public OnlineReaderSystem(UserManagement users, Library library) {
+    public OnlineReaderSystem(UserManagement users, Library library, Reader reader) {
         this.users = users;
         this.library = library;
-    }
-    //user services
-    public boolean register(User user) {
-        return users.register(user);
+        this.reader = reader;
     }
 
-    public boolean signIn(User user) {
+    //Getters and Setters
 
+    public UserManagement getUsers() {
+        return users;
     }
 
-    public boolean signOut(User user) {
-
+    public void setUsers(UserManagement users) {
+        this.users = users;
     }
 
-    public boolean unregister(User user) {
-
+    public Library getLibrary() {
+        return library;
     }
 
-    //book service
-    public void searchBook(Book book) {
-
+    public void setLibrary(Library library) {
+        this.library = library;
     }
 
-    public boolean requireBook(User user, Book book) {
-
+    public Reader getReader() {
+        return reader;
     }
 
-    public boolean returnBook(User user, Book book) {
-
+    public void setReader(Reader reader) {
+        this.reader = reader;
     }
-
-
-
 }

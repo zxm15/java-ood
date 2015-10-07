@@ -1,35 +1,30 @@
 package OnlineBookReader;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * Created by zxm on 10/6/15.
  */
 public class UserManagement {
-    private List<User> users;
-    private Map<User, Boolean> activeUsers;
+    private Map<Integer, User> users;
 
     public UserManagement() {
-        users = new ArrayList<>();
-        activeUsers = new HashMap<>();
+        users = new HashMap<>();
     }
 
-    public boolean register(User user) {
+    public boolean register(int id, String username, String password) {
+        if (users.containsKey(id)) return false;
+        User user = new User(id, username, password);
+        users.put(id, user);
 
+        return true;
     }
 
-    public boolean unregister(User user) {
-
+    public void unregister(User user) {
+        users.remove(user.getId());
     }
 
-    public boolean signIn(User user) {
-
-    }
-
-    public boolean signOut(User user) {
-
-    }
+   
 }
