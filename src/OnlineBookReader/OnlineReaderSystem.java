@@ -1,17 +1,20 @@
 package OnlineBookReader;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by zxm on 10/6/15.
  */
 public class OnlineReaderSystem {
     private UserManagement users; //user service
     private Library library; //book service
-    private Reader reader; //reading service
+    private List<Reader> reader; //reading service
 
-    public OnlineReaderSystem(UserManagement users, Library library, Reader reader) {
-        this.users = users;
-        this.library = library;
-        this.reader = reader;
+    public OnlineReaderSystem() {
+        this.users = new UserManagement();
+        this.library = new Library();
+        this.reader = new ArrayList<>();
     }
 
     //Getters and Setters
@@ -32,11 +35,5 @@ public class OnlineReaderSystem {
         this.library = library;
     }
 
-    public Reader getReader() {
-        return reader;
-    }
-
-    public void setReader(Reader reader) {
-        this.reader = reader;
-    }
+    
 }

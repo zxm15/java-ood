@@ -15,6 +15,7 @@ public class Reader {
 
     public boolean gotoPage(int pageNumber) {
         if (pageNumber > book.getTotalPages()) return false;
+        refreshPage();
         return true;
     }
 
@@ -23,7 +24,7 @@ public class Reader {
             currPageNumber--;
             return false;
         }
-
+        refreshPage();
         return true;
     }
 
@@ -32,8 +33,12 @@ public class Reader {
             currPageNumber++;
             return false;
         }
-
+        refreshPage();
         return true;
+    }
+
+    private void refreshPage() {
+        System.out.println("The page is refreshed and ready to read");
     }
 
     public void openBook(Book book) {
