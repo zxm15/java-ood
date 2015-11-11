@@ -6,6 +6,7 @@ package OnlineBookReader;
 public class OnlineBookReaderMain {
 
     public static void main(String[] args) {
+        OnlineReaderSystem system = new OnlineReaderSystem();
 
     }
 }
