@@ -8,6 +8,8 @@ out/
 
 ## Directory-based project format:
 .idea/
+
+tests/
 # if you remove the above rule, at least ignore the following:
 
 # BusUser-specific stuff:
