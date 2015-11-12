@@ -3,6 +3,12 @@ use cases:
 register/unregister
 login/logout
 manage profile
-remember me
 
+remember me
+implemented using login cookie which contains a series identifier and a hashed token
+if both match with the database record, then it is autheticated. New token and login cookie should be issued to the user
+if series match but now the token, it was assumed a theft. All session deleted
+if both not presented, login cookie ignored.
+
+scalability:
 

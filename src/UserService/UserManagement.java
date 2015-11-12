@@ -47,6 +47,7 @@ public class UserManagement {
     }
 
     public void login(String email, String password) {
+
         if (! users.containsKey(email))
             throw new IllegalArgumentException("The account does not exist");
         User user = users.get(email);
@@ -62,6 +63,7 @@ public class UserManagement {
         User user = users.get(email);
         user.setStatus(Status.INACTIVE);
     }
+
 
     
 

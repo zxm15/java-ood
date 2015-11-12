@@ -2,7 +2,9 @@ package UserService;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -15,7 +17,7 @@ public class User {
     private Status status;
     private String email;
     private Timestamp lastLoginTime;
-    private List<Session> sessions;
+    private Map<String, Session> sessions;
 
     public User(int id, String name, String password, Status status, String email) {
         this.id = id;
@@ -23,7 +25,7 @@ public class User {
         this.password = password;
         this.status = status;
         this.email = email;
-        sessions = new ArrayList<>();
+        sessions = new HashMap<>();
     }
 
     public int getId() {
