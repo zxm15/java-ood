@@ -1,0 +1,18 @@
+use cases
+
+1.user send request to dispatcher
+2.patcher stores the request and call dispatch method to locate a proper group of drivers
+3.dispatch send updates to the drivers
+4.drivers answers request
+5.dispatcher update the user
+
+
+
+thread-safe producers and consumer pattern to submit user request and confirm user request
+observer pattern to handle send message to users and drivers
+
+
+first step:
+no worries about the thread-safe thing, no worries about the design pattern, no worries about the scalability
+
+
