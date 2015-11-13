@@ -1,0 +1,9 @@
+for a public API, there is limitation for the call times. Normally, you cannot call the API more the 5 times per second.
+Design a rate limiter to filter the API calls.
+
+1.Design rate limter for every second using 1 counter.
+
+2. Design rate limiter for any second using 1 queue.
+
+In long term, both design could limit the request number is less than 5 per second.
+The second could distributed the request more evenly.
