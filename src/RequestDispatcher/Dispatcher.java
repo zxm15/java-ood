@@ -33,7 +33,7 @@ public class Dispatcher {
                 }
             }
         }
-        sendConfirmation(request.getUser());
+        //sendConfirmation(request.getUser());
 
     }
 
