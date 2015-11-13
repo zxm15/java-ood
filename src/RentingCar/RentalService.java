@@ -21,16 +21,12 @@ public class RentalService {
     }
 
 
-    public List<Car> findAvaiableCars(Date startDate, Date endDate) {
+    public List<Car> findAvaiableCars (Date startDate, Date endDate) {
         List<Car> res = new ArrayList<>();
-        Date date = new Date();
-        if (startDate.before(date))
-            throw new IllegalArgumentException("The start date cannot be earlier than today");
-        if (startDate.after(endDate))
-            throw new IllegalArgumentException("The end date must be larger than the start date");
+        checkInput(startDate, endDate);
         for (Map<Integer, Car> carMap : carMaps) {
             for (Car car : carMap.values()) {
-                if (car.getAvaiableDate().before(startDate))
+                if (checkIfCarAvaiable(car, startDate, endDate))
                     res.add(car);
             }
         }
@@ -45,14 +41,10 @@ public class RentalService {
 
     public List<Car> findAvaibleCarsByType(Date startDate, Date endDate, CarType carType) {
         List<Car> res = new ArrayList<>();
-        Date date = new Date();
-        if (startDate.before(date))
-            throw new IllegalArgumentException("The start date cannot be earlier than today");
-        if (startDate.after(endDate))
-            throw new IllegalArgumentException("The end date must be larger than the start date");
+        checkInput(startDate, endDate);
         Map<Integer, Car> carMap = carMaps.get(carType.getValue());
         for (Car car : carMap.values()) {
-            if (car.getAvaiableDate().before(startDate))
+            if (checkIfCarAvaiable(car, startDate, endDate))
                 res.add(car);
         }
 
@@ -63,10 +55,7 @@ public class RentalService {
 
         List<Car> res = new ArrayList<>();
         Date date = new Date();
-        if (startDate.before(date))
-            throw new IllegalArgumentException("The start date cannot be earlier than today");
-        if (startDate.after(endDate))
-            throw new IllegalArgumentException("The end date must be larger than the start date");
+        checkInput(startDate, endDate);
         for (Map<Integer, Car> carMap : carMaps) {
             for (Car car : carMap.values()) {
                 if (car.getAvaiableDate().before(startDate) && car.getPrice() >= low && car.getPrice() <= high)
@@ -94,7 +83,7 @@ public class RentalService {
      * @param timeUnit the unit in which you want the diff
      * @return the diff value, in the provided unit
      */
-    public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+    public long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
         long diffInMillies = date2.getTime() - date1.getTime();
         return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
@@ -128,6 +117,14 @@ public class RentalService {
 
     private boolean checkIfCarAvaiable(Car car, Date startDate, Date endDate) {
         return car.getAvaiableDate().before(startDate);
+    }
+
+    private void checkInput(Date startDate, Date endDate) {
+        Date date = new Date();
+        if (startDate.before(date))
+            throw new IllegalArgumentException("The start date cannot be earlier than today");
+        if (startDate.after(endDate))
+            throw new IllegalArgumentException("The end date must be larger than the start date");
     }
 
 
