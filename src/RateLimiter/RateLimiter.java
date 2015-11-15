@@ -17,7 +17,7 @@ public class RateLimiter {
         queue = new LinkedList<>();
     }
 
-    public boolean handleRequestWithCounter() {
+    public synchronized boolean handleRequestWithCounter() {
         long currSecond = System.currentTimeMillis() / 1000;
         if (prevSecond != currSecond) {
             prevSecond = currSecond;
@@ -30,18 +30,17 @@ public class RateLimiter {
         return false;
     }
 
-    public boolean handleRequestWithQueue() {
+    public synchronized boolean handleRequestWithQueue() {
         long currSecond = System.currentTimeMillis();
         if (currSecond - queue.peek() > 1) {
             queue.poll();
+
+        }
+        if (queue.size() < 5) {
             queue.offer(currSecond);
             return true;
-        } else {
-            if (queue.size() < 5) {
-                queue.offer(currSecond);
-                return true;
-            } else return false;
-        }
+        } else return false;
+
     }
 
 
