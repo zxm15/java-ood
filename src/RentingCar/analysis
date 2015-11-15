@@ -1,0 +1,9 @@
+use cases
+
+1. we have a collections of cars for users to pick
+2. user select the date range to rent a car
+3. if the car is available during the date range, user could make reservation for the car
+4. when the car is returned, we charge the user
+
+components
+user, car, reservation, order, payment
