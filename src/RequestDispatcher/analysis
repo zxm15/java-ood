@@ -16,3 +16,8 @@ first step:
 no worries about the thread-safe thing, no worries about the design pattern, no worries about the scalability
 
 
+now the first draft is done, how to improve it?
+
+how to wait for a driver's answer without using while true? thread await and notify
+use observer pattern to send request to drivers;
+use producer and consumer pattern to dispatch request
