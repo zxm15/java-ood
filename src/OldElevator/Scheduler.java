@@ -1,4 +1,4 @@
-package Elevator;
+package OldElevator;
 
 import java.util.*;
 
@@ -99,11 +99,11 @@ public class Scheduler {
     }
 
 
-//    private void assignRequestToElevatorHelper(List<Elevator> elevators, Request request) {
+//    private void assignRequestToElevatorHelper(List<OldElevator> elevators, Request request) {
 //        if (elevators == null || elevators.isEmpty()) throw new IllegalArgumentException("The elevator list is empty");
 //        int size = elevators.size();
 //        for (int i = 0; i < size; i++) {
-//            Elevator elevator = elevators.get(i);
+//            OldElevator elevator = elevators.get(i);
 //            if (! elevator.getCurrDirection().equals(request.getDirection())) break;
 //            int diff = request.getFloor() - elevator.getFloor();
 //            if (diff > buffer) {

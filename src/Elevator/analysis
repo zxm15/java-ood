@@ -1,0 +1,13 @@
+use cases:
+
+user call elevator in the building
+elevator go to pick up user (open door, close door)
+user press a floor in elevator
+elevator go to the floor
+
+do not worry about the scheduling now
+
+class
+user
+elevator
+elevator status

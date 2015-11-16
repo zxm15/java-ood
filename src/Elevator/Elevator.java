@@ -1,72 +1,49 @@
 package Elevator;
 
-import java.util.Collections;
-import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
- * Created by ZXM on 9/17/15.
+ * Created by ZXM on 11/15/15.
  */
-public class Elevator {
-    private final int maxWeight = 2000;
-    private Direction currDirection;
-    private ElevatorStatus status;
-    private PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-    private PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-    private int floor;
+public class Elevator implements Runnable{
+    //for simplicity we just use a queue to store the tasks
+    private Queue<Integer> floors;
+    private final int MAXWEIGHT = 1400;
+    private int weight;
+    ElevatorStatus elevatorStatus;
 
-    /**
-     * Elevator add a request to task heap
-     * @param floor
-     */
+    public void addFloor(int floor) {
+        floors.add(floor);
+    }
 
-    public void addRequest(int floor) {
-        //check request moving direction aligns with elevators moving direction, if not, then
+    public void gotoNextFloor() {
+        gotoFloor(floors.poll());
 
     }
 
-    /**
-     * Impelment a logic that determines if the elevator could open door now
-     * @return
-     */
-    public boolean openDoor() {
-        return false;
+    private void gotoFloor(int floor){}
+
+    public void openDoor() {
+
+
     }
 
-    /**
-     * Implement a logic that determines i the elevator could close door now
-     * @return
-     */
-    public boolean closeDoor() {
-        return false;
-    }
-    
-    //Getters and Setters
+    public void closeDoor() {
 
-    public int getMaxWeight() {
-        return maxWeight;
     }
 
-    public Direction getCurrDirection() {
-        return currDirection;
+    public void removeCurrentFloor() {
+        floors.poll();
     }
 
-    public void setCurrDirection(Direction currDirection) {
-        this.currDirection = currDirection;
+    public boolean checkIfExceedWeightLimit() {
+        return weight >= MAXWEIGHT;
     }
 
-    public ElevatorStatus getStatus() {
-        return status;
+    public void run() {
+
     }
 
-    public void setStatus(ElevatorStatus status) {
-        this.status = status;
-    }
 
-    public int getFloor() {
-        return floor;
-    }
 
-    public void setFloor(int floor) {
-        this.floor = floor;
-    }
 }

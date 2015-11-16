@@ -1,9 +1,8 @@
 package Elevator;
 
 /**
- * Created by ZXM on 9/20/15.
+ * Created by ZXM on 11/15/15.
  */
 public enum ElevatorStatus {
-    IDLE, MOVING, WAITING;
-
+    RUNNING, DOOROPEN, IDLE;
 }
