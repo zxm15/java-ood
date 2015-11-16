@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by ZXM on 11/11/15.
  */
-public class User {
+public class User implements Runnable {
     private int id;
     private String name;
     private String password;
@@ -28,6 +28,7 @@ public class User {
         sessions = new HashMap<>();
     }
 
+    public void run(){}
     public int getId() {
         return id;
     }

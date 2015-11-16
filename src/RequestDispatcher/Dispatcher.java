@@ -3,16 +3,17 @@ package RequestDispatcher;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * Created by ZXM on 11/13/15.
  */
-public class Dispatcher {
+public class Dispatcher implements Subject {
 
-    Queue<Request> queue;
+    BlockingQueue<Request> queue = new ArrayBlockingQueue<>(100);
 
     public Dispatcher() {
-        queue = new LinkedList<>();
     }
 
     public void addRequest(Request request) {
@@ -22,7 +23,7 @@ public class Dispatcher {
     public void dispatchRequest(Request request, MapService mapService) {
         Location location = request.getLocation();
         List<Driver> drivers = mapService.getDriversAroundLocaiton(location);
-        sendRequest(drivers, request);
+        //sendRequest(drivers, request);
 
         while (true) {
             for (Driver driver : drivers) {
@@ -37,11 +38,25 @@ public class Dispatcher {
 
     }
 
-    private void sendRequest(List<Driver> drivers, Request request) {
-
-    }
+//    public void sendRequest(List<Driver> drivers, Request request) {
+//
+//
+//    }
 
     private void sendConfirmation(User user) {
 
     }
+
+    public void register(Request request){
+
+    }
+
+    public void unregister(Request request) {
+
+    }
+    public void sendRequest(Observer observer, Request request) {
+
+    }
+
+
 }
