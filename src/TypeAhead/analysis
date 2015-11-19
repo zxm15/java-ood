@@ -1,0 +1,12 @@
+the nature of typeahead is to take the input as prefix and match the data source
+
+trie-tree
+
+company name, customer name, email,  product name, sku,
+
+for each one of them we product a local trie tree
+
+what about the space or some other special characters in the name? we take the full name in the trie tree including space,
+make it a special character in the tree node
+
+assume now we are supporting special character such as white space, @, .com, .net, .gov,
