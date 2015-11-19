@@ -1,0 +1,31 @@
+use cases:
+
+user service (register.. song list
+channels
+play songs
+location service
+charts service (rank tops 50 songs in countires)
+discover (recommendation service)
+socail network (connected with facebook)
+search service(typeahead, rank)
+concert event service(posts concert link)
+radio service
+
+
+ it is actually the music netflix service
+
+find top 10 songs
+
+30m songs overall, map<song id, number of plays> => [30m * 8byte] = 240m  fits in memory
+
+use min heap with size == 10
+
+assume you have a very much song list which cannot be contained in memory or to speed up
+
+1. hash(song id) % 1000 to store index into 1000 files
+2. use map reduce to find top 10 of each file
+3. find top 10 of 10000 songs using min heap
+
+
+
+

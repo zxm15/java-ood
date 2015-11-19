@@ -1,0 +1,52 @@
+use cases:
+
+create table;
+write content to table cell
+create relations between cell in table
+
+class
+table, cell, relations between cells
+
+e.g
+cell(2,2) = sum(cell(1,1, 2,1, 1,2))
+
+parent      child
+
+cell 1,1 => cell 2,2
+cell 2,1 => cell 2,2
+cell 1,2 => cell 2,2,
+
+directed graph
+
+
+list<cell> as neighbors but this is not enough because we will need to create relations between cells
+
+list<Relation> relations
+
+ class Relation {
+    cell input
+    cell output
+
+    pass function as variable => use interface as a way of passing method as varaible
+
+
+ }
+
+ Inteface function {
+
+    public execute()
+ }
+
+ class SumFunction implments Fuction{
+
+    List<Integer> arguments;
+
+    public int sum() {
+
+        return sum(arguments);
+    }
+
+    public execute() {
+
+    }
+ }

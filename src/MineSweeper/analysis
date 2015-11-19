@@ -1,0 +1,12 @@
+use cases:
+1. create a board with initil boms placed somewhere
+2. use could click a cell
+3. there are 3 possible types of cell : blank, numeric, bomb
+4. after clicking, different rules applied
+5. use could mark a cell as a flag which prevent user to click on it until user unflag the cell.
+6. games ends when either all the cells left are bombs or user click a bomb cell
+
+object
+board, cell,
+user click cell is to changed the cell's faceValue
+
