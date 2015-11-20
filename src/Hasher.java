@@ -56,7 +56,12 @@ public class Hasher<K, V> {
         LinkedListNode nextNode = node.next;
         if (prevNode != null) {
             prevNode.next = nextNode;
+
+        } else {
+            int index = getIndexForKey(key);
+            arr.set(index, nextNode);
         }
+        if (nextNode != null) nextNode.prev = prevNode;
     }
 
     private LinkedListNode<K, V> getNodeForKey(K key) {
