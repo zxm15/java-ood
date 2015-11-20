@@ -1,0 +1,19 @@
+design a rotated array
+
+how do you want to support rotation?
+there is a rotate function
+public void rotate(int shiftRight)
+
+
+1,2,3,4,5  shift 2
+4,5,1,2,3
+
+if I place a pointer at 4 and use it as the head, then nothing need to changed
+
+4,5,1,2,3   shift 2
+2,3,4,5,1   shift 2
+
+5,1,2,3,4   total shift = 6
+
+the way to calculate head = total shift % array.length; 1 represents head should be at the last element;
+
